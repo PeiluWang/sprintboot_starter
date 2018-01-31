@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<contextName>org.pillow</contextName>
+	
+	<!-- 变量 -->
+	<!-- <property name="LOG_DIR" value="/home/upa_data_fetch/logs" /> -->
+	<property name="LOG_DIR" value="logs" /> 
+	<property name="LOG_PATTERN"
+		value="%d{yyyy-MM-dd HH:mm:ss}\t%level\t%logger\t%msg%n" />
+	
+	<!-- 输出日志 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</layout>
+	</appender>
+	
+	<!-- 系统日志：调试 -->
+	<appender name="SYSTEM_DEBUG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/system_debug-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 系统日志：常规记录 -->
+	<appender name="SYSTEM_INFO"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/system_info-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 系统日志：警报 -->
+	<appender name="SYSTEM_WARN"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/system_warn-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 系统日志：严重 -->
+	<appender name="SYSTEM_ERROR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/system_error-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 接口被访问记录日志，用于统计用户行为 -->
+	<appender name="API_REQUEST"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/api_request-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}\t%msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 接口返回记录日志，用于统计系统响应时间 -->
+	<appender name="API_RESPONSE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/api_response-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}\t%msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 控制台输出 -->
+	<root>
+		<level value="INFO" />   
+		<appender-ref ref="STDOUT"></appender-ref>
+	</root> 
+
+	<logger name="system" level="DEBUG">
+		<appender-ref ref="SYSTEM_DEBUG"></appender-ref>
+		<appender-ref ref="SYSTEM_INFO"></appender-ref>
+		<appender-ref ref="SYSTEM_WARN"></appender-ref>
+		<appender-ref ref="SYSTEM_ERROR"></appender-ref>
+	</logger>
+	
+	<logger name="api_request" level="INFO">
+		<appender-ref ref="API_REQUEST"></appender-ref>
+	</logger>
+	
+	<logger name="api_response" level="INFO">
+		<appender-ref ref="API_RESPONSE"></appender-ref>
+	</logger>
+
+</configuration>

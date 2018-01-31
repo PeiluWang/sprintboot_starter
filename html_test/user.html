@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>api test</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery-3.0.0.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <div class="row" style="width:100%;">
+      <div id="apiArea" class="col-md-4 col-md-offset-2" style="height:100%;overflow:auto;position:absolute;">
+          <!--test begin -->
+          <h3>获取全部用户</h3>
+          <p>GET: /users/all</p>
+          <input class="btn btn-default" type="button" value="test" onclick="get_users()">
+          <script type="text/javascript">
+              function get_users(){
+				  var request = {
+					"api": "/users/all",
+					"data": {}
+				  }
+                  testGetData(request);
+              }
+          </script>
+		  
+		  <h3>获取分页用户</h3>
+          <p>GET: /users</p>
+          <input class="btn btn-default" type="button" value="test" onclick="get_page_users()">
+          <script type="text/javascript">
+              function get_page_users(){
+				  var request = {
+					"api": "/users",
+					"data":  {"pageOffset":0, "pageSize":2}
+				  }
+                  testGetData(request);
+              }
+          </script>
+		  
+		  <h3>添加用户</h3>
+          <p>POST: /users</p>
+          <input class="btn btn-default" type="button" value="test" onclick="post_users()">
+          <script type="text/javascript">
+              function post_users(){
+				   var request = {
+					"api": "/users",
+					"data":  {"userName":"Einstein",
+					  "realName":"Albert Einstein",
+					  "firstName":"Albert",
+					  "lastName":"Einstein",
+					  "password":"123456",
+					  "email":"einstein@physics.de",
+					  "phoneNo":"12345678"}
+				  }
+                  testPostData(request);
+              }
+          </script>
+		   
+		  <!-- end test -->
+      </div>
+	  
+	  <div class="col-md-4 col-md-offset-6" style="position:fixed">
+		<h3>全局变量</h3>
+		<div>
+			<div style="width:100px;text-align:right;float:left;padding-right:20px">base url:  </div>
+			<input id="baseUrl" style="width:400px" />
+		</div>
+		<br/>
+		<div>
+			<div style="width:100px;text-align:right;float:left;padding-right:20px">token:  </div>
+			<input id="token" style="width:400px" />
+		</div>
+		<div><h3>请求参数</h3></div>
+			<textarea id="requestArea" rows="5" style="width:100%" >
+			</textarea>
+			 <input id="userDefined" type="checkbox"/> 用户自定义
+		<h3>响应结果</h3>
+			<textarea id="responseArea" rows="20" style="width:100%" >
+			</textarea>
+			<br/>
+			<br/>
+			 <input class="btn btn-default" type="button" value="重置" onclick="reset()">
+	  </div>
+	 
+  </div>
+  
+  <script src="config.js"></script>
+</body>
+</html>
