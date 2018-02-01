@@ -25,11 +25,11 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter{
 		String token = param.getToken();
 		//todo: 检查token是否合法
 		//如果token合法，根据token获取用户信息，保存在request中
-		
 		//访问的端口
 		String api = request.getRequestURI();
 		String ip = HttpRequestUtil.getIp(request);
 		String reqParam = HttpRequestUtil.getParam(request);
+		String method = request.getMethod();
 		//访问的id，用于日志分析
 		String requestId = DateTimeUtil.timestamp()+"_"+RandomUtil.randStr(3);
 		//记录访问时间，用于统计分析
@@ -37,7 +37,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter{
 		request.setAttribute("requestTime", requestTime);
 		request.setAttribute("requestId", requestId);
 		//记录访问日志
-		REQUEST_LOG.info(api+"\t"+requestId+"\t"+ip+"\t"+reqParam);
+		REQUEST_LOG.info(method+"\t"+api+"\t"+requestId+"\t"+ip+"\t"+reqParam);
 		return true;
 	}
 
@@ -45,11 +45,12 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		String requestId = (String) request.getAttribute("requestId");
+		String method = request.getMethod();
 		long startTime = (Long) request.getAttribute("requestTime");
         long endTime = System.currentTimeMillis();
         long executeTime = endTime - startTime;
         String api = request.getRequestURI();
-        RESPONSE_LOG.info(api+"\t"+requestId+"\t"+executeTime);
+        RESPONSE_LOG.info(method+"\t"+api+"\t"+requestId+"\t"+executeTime);
 	}
 
 	

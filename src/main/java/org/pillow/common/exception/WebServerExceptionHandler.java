@@ -27,12 +27,13 @@ public class WebServerExceptionHandler {
     @ResponseBody
     public BaseResponse<ServerErrorInfo> defaultErrorHandler(HttpServletRequest req, HttpServletResponse response, Exception e) throws Exception {
 		String requestId = (String) req.getAttribute("requestId");
+		String method = req.getMethod();
+		String api = req.getRequestURI();
 		//若有后台定义的错误码则按该错误码返回
     	if(e instanceof WebServerException){
     		//e.printStackTrace();
     		WebServerException webExp=(WebServerException)e;
-    		String api = req.getRequestURI();
-    		SYSTEM_LOG.warn(api+"\t"+requestId+"\t"+webExp.getError()+"\t"+webExp.getErrorDetailMsg());
+    		SYSTEM_LOG.warn(method+"\t"+api+"\t"+requestId+"\t"+webExp.getError()+"\t"+webExp.getErrorDetailMsg());
     		return new BaseResponse<ServerErrorInfo>(1, new ServerErrorInfo(webExp.getError(), webExp.getErrorDetailMsg()));
     	} else {
     	//其他

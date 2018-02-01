@@ -16,6 +16,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.pillow.common.exception.WebServerError;
 import org.pillow.common.exception.WebServerException;
+import org.pillow.model.dto.PageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

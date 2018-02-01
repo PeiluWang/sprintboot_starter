@@ -1,4 +1,4 @@
-package org.pillow.common.database;
+package org.pillow.model.dto;
 
 import java.util.List;
 

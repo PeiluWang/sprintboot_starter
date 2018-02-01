@@ -6,12 +6,12 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.pillow.common.database.DBUtil;
-import org.pillow.common.database.PageData;
 import org.pillow.common.exception.WebServerError;
 import org.pillow.common.exception.WebServerException;
 import org.pillow.common.util.EncryptionUtil;
 import org.pillow.common.util.ModelUtil;
 import org.pillow.model.User;
+import org.pillow.model.dto.PageData;
 import org.pillow.model.dto.PageParam;
 import org.pillow.model.dto.UserForm;
 import org.pillow.repository.UserRepository;

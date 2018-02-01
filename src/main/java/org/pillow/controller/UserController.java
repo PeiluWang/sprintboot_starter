@@ -2,13 +2,13 @@ package org.pillow.controller;
 
 import java.util.ArrayList;
 
-import org.pillow.common.database.PageData;
 import org.pillow.common.exception.WebServerException;
 import org.pillow.common.response.BaseResponse;
 import org.pillow.common.response.ListResponse;
 import org.pillow.common.response.PageResponse;
 import org.pillow.common.util.ModelUtil;
 import org.pillow.model.User;
+import org.pillow.model.dto.PageData;
 import org.pillow.model.dto.PageParam;
 import org.pillow.model.dto.UserForm;
 import org.pillow.model.dto.UserListItem;

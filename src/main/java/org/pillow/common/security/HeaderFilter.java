@@ -8,11 +8,12 @@ import java.io.IOException;
 
 /**
  * 支持跨域资源访问（CORS）
+ * 防Clickjack攻击
  *
  * @author peilu.wang
  */
 @Component
-public class SimpleCORSFilter implements Filter {
+public class HeaderFilter implements Filter {
 	
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
